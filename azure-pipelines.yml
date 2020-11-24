@@ -18,12 +18,14 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
+    workingDir: '\liminal'
   displayName: 'npm install'
 
 - task: Npm@1
   inputs:
     command: 'custom'
     customCommand: 'run build'
+    workingDir: '\liminal'
   displayName: 'npm build'
 
 
