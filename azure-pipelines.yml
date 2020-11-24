@@ -12,24 +12,21 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
-- task: Npm@1
-  inputs:
-    command: 'install'
-  displayName: 'npm install'
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 
-- task: Npm@1
+- task: CopyFiles@2
   inputs:
-    command: 'custom'
-    customCommand: 'run build'
-  displayName: 'npm build'
-
+    Contents: 'build/**' # Pull the build directory (React)
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'build'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+  inputs: 
+    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+    ArtifactName: 'drop' # output artifact named drop
 
