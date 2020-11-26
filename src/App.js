@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>1.0.0.1</p>
       </header>
     </div>
   );
