@@ -28,6 +28,11 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+- task: ResharperCli@2
+  inputs:
+    solutionOrProjectPath: 'liminal-webapi.sln'
+    failBuildLevelSelector: 'Warning'
+
 
 - task: PublishBuildArtifacts@1
   inputs: 
