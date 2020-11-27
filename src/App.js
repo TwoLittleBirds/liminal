@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
+var pjson = require('../package.json');
+
 function App() {
   return (
     <div className="App">
@@ -17,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-        <p>1.0.0.13</p>
+        <p>{pjson.version}</p>
       </header>
     </div>
   );
