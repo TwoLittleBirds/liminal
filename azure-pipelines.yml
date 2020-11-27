@@ -18,10 +18,10 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    npm version patch
     npm install
-    npm version patch  
     npm run build
-  displayName: 'npm install patch and build'
+  displayName: 'npm install and build'
 
 - task: WhiteSource Bolt@20
   inputs:
@@ -33,6 +33,8 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
+
+
 - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
