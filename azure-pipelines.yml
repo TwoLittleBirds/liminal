@@ -25,7 +25,6 @@ steps:
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
-    exclude: 'node_modules'
 
 - task: CopyFiles@2
   inputs:
