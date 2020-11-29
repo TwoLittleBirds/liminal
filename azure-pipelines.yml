@@ -34,18 +34,8 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - script: |
-    CI=true npm run coverage
+    CI=true npm test
   displayName: 'npm test and coverage'
-
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results junit.xml'
-  inputs:
-    testResultsFiles: junit.xml
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
 
 - task: PublishBuildArtifacts@1
   inputs: 
