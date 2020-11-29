@@ -24,7 +24,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    npm test -- --ci
+    npm test --watchAll=false
   displayName: 'jest unit tests'
   
 - task: WhiteSource Bolt@20
