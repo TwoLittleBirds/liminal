@@ -38,20 +38,5 @@
   },
   "devDependencies": {
     "jest-junit-reporter": "^1.1.0"
-  },
-  "jest": {
-    "coverageReporters": [
-      "text",
-      "cobertura",
-      "html"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
-    ]
-  },
-  "jest-junit": {
-    "output": "output/coverage/junit/junit.xml",
-    "usePathForSuiteName": "true"
   }
 }
