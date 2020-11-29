@@ -21,7 +21,7 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'test -reporter jest-junit-reporter'
-      displayName: 'npm test'
+  displayName: 'npm test'
 
 - script: |
     npm version patch
