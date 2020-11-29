@@ -18,15 +18,15 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm test
-  displayName: 'npm test'
-
-- script: |
     npm version patch
     npm install
     npm run build
   displayName: 'npm install and build'
 
+- script: |
+    npm test
+  displayName: 'npm test'
+  
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
