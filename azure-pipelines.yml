@@ -24,8 +24,8 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    jest test --reporter jest-junit-reporter
-  displayName: 'npm test'
+    jest test-ci
+  displayName: 'jest unit tests'
   
 - task: WhiteSource Bolt@20
   inputs:
