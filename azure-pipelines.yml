@@ -23,16 +23,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- script: |
-    CI=true npm test
-  displayName: 'npm test'
-  
-
-#- task: PublishCodeCoverageResults@1
-#  inputs:
-#    codeCoverageTool: Cobertura
-#    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
@@ -43,9 +33,21 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
+- script: |
+    CI=true npm run coverage
+  displayName: 'npm test and coverage'
 
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results junit.xml'
+  inputs:
+    testResultsFiles: junit.xml
 
-- task: PublishBuildArtifacts@1
+- task: PublishCodeCoverageResults@1
+  inputs:
+   codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+
+  - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
     ArtifactName: 'drop' # output artifact named drop

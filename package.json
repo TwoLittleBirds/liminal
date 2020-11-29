@@ -14,8 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test-old": "react-scripts test --watchAll=false --coverage --coverageReporters=cobertura",
-    "test": "react-scripts test --reporter jest-junit-reporter",
+    "coverage": "react-scripts test --coverage --coverageReporters=cobertura --coverageReporters=html",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,5 +38,20 @@
   },
   "devDependencies": {
     "jest-junit-reporter": "^1.1.0"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "cobertura",
+      "html"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
+  "jest-junit": {
+    "output": "output/coverage/junit/junit.xml",
+    "usePathForSuiteName": "true"
   }
 }
