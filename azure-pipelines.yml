@@ -17,6 +17,12 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'test -reporter jest-junit-reporter'
+      displayName: 'npm test'
+
 - script: |
     npm version patch
     npm install
