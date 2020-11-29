@@ -14,9 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test-ci": "react-scripts test — testResultsProcessor ./node_modules/jest-junit-reporter"
+    "test": "react-scripts test --watchAll=false --coverage --coverageReporters=cobertura",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

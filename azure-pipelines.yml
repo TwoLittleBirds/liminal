@@ -25,8 +25,14 @@ steps:
 
 - script: |
     CI=true npm test
-  displayName: 'jest unit tests'
+  displayName: 'npm test'
   
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
+
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
