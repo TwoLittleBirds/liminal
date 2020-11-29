@@ -24,7 +24,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    jest test-ci
+    nmp test -- --ci
   displayName: 'jest unit tests'
   
 - task: WhiteSource Bolt@20
