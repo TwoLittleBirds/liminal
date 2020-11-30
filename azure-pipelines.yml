@@ -37,12 +37,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: SonarCloudAnalyze@1
-
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
-
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
@@ -56,6 +50,13 @@ steps:
 - script: |
     CI=true npm test
   displayName: 'npm test and coverage'
+
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: PublishBuildArtifacts@1
   inputs: 
