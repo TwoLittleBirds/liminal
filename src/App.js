@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+export default function App() {
   const classes = useStyles();
 
   return (
@@ -35,7 +35,6 @@ export default function MenuAppBar() {
             <AccountMenu/>
         </Toolbar>
       </AppBar>
-      
     </div>
   );
 }
