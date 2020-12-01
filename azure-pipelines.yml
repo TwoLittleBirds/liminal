@@ -17,6 +17,20 @@ steps:
     versionSpec: '12.x'
   displayName: 'Install Node.js'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'twolittlebirds'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'TwoLittleBirds_liminal'
+    cliProjectName: 'liminal'
+    cliSources: '.'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      sonar.exclusions=**/node_modules/*, **/__tests__/*
+
 - script: |
     npm version patch
     npm install
@@ -36,6 +50,13 @@ steps:
 - script: |
     CI=true npm test
   displayName: 'npm test and coverage'
+
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: PublishBuildArtifacts@1
   inputs: 
