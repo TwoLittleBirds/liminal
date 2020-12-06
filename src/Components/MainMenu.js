@@ -89,13 +89,15 @@ export default function MainMenu() {
   return (
     <div className={classes.root}>
       <AppBar
+        data-testid="menu-appbar"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar data-testid="menu-toolbar">
           <IconButton
+            data-testid="menu-iconbutton"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -106,12 +108,13 @@ export default function MainMenu() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap data-testid="menu-heading">
             Liminal
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
+        data-testid="menu-drawer"      
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
