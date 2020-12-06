@@ -126,7 +126,7 @@ export default function MiniDrawer() {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            <MenuOpenIcon />
+            {theme.direction === 'rtl' ? <MenuIcon /> : <MenuOpenIcon />}
           </IconButton>
         </div>
         <Divider />
