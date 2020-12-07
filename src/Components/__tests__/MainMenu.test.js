@@ -1,37 +1,37 @@
 import { render, screen } from '@testing-library/react';
-import MainMenu from '../MainMenu';
+import MainLayout from '../MainLayout';
 
 
 test('renders appbar', () => {
-  render(<MainMenu />);
+  render(<MainLayout />);
 
   const elem = screen.getByTestId("menu-appbar");
   expect(elem).toBeInTheDocument();
 });
 
 test('renders toolbar', () => {
-  render(<MainMenu />);
+  render(<MainLayout />);
 
   const elem = screen.getByTestId("menu-toolbar");
   expect(elem).toBeInTheDocument();
 });
 
 test('renders iconbutton', () => {
-    render(<MainMenu />);
+    render(<MainLayout />);
   
     const elem = screen.getByTestId("menu-iconbutton");
     expect(elem).toBeInTheDocument();
 });
 
 test('renders heading', () => {
-  render(<MainMenu />);
+  render(<MainLayout />);
 
   const elem = screen.getByTestId("menu-heading");
   expect(elem).toBeInTheDocument();
 });
 
 test('renders drawer', () => {
-  render(<MainMenu />);
+  render(<MainLayout />);
 
   const elem = screen.getByTestId("menu-drawer");
   expect(elem).toBeInTheDocument();

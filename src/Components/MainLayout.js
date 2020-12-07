@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MainMenu() {
+export default function MainLayout() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
