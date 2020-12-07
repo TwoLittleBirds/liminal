@@ -15,6 +15,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
+import Home from '../Views/Home';
+import About from '../Views/About';
+import NotFound from '../Views/NotFound';
 
 const drawerWidth = 240;
 
@@ -27,6 +31,22 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  content: {
+    zIndex: theme.zIndex.drawer + 1,
+    marginLeft: theme.spacing(9) + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  contentShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -113,44 +133,49 @@ export default function MainMenu() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        data-testid="menu-drawer"      
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+      <BrowserRouter>
+        <Drawer
+          data-testid="menu-drawer"      
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <MenuIcon /> : <MenuOpenIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <MenuIcon /> : <MenuOpenIcon />}
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            {['Home', 'About'].map((text, index) => (
+              <ListItem button key={text} component={Link} to={"/" + text}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <main className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}>
+          <div className={classes.toolbar} />
+
+          <Switch>
+            <Route exact path="/" render={() => <Home/>} />
+            <Route exact path="/Home" render={() => <Home/>} />
+            <Route path="/About" render={() => <About/>} />
+            <Route component={NotFound} />
+          </Switch>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
