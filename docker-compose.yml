@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  client:
+    stdin_open: true
+    build: 
+      context: .
+      dockerfile: dockerfile.dev
+    ports: 
+      - 3000:3000
+# The volume mount does not work!
+#    volumes: 
+#      - "/app/node-modules"
+#      - "/:/app"
