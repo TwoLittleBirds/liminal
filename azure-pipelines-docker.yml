@@ -9,7 +9,7 @@ resources:
 
 variables:
   iimageName: 'liminal-docker'
-  tag: $(Build.BuildId)'
+  tag: 'liminal-image:$(Build.BuildId)'
 
 stages:
 - stage: Build
