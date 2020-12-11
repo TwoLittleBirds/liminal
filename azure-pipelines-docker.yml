@@ -8,6 +8,7 @@ resources:
 - repo: self
 
 variables:
+  iimageName: 'liminal-docker'
   tag: $(Build.BuildId)'
 
 stages:
@@ -22,6 +23,7 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
+        repository: $(imageName)
         command: build
         dockerfile: '$(Build.SourcesDirectory)/dockerfile.prod'
         tags: |
