@@ -11,7 +11,7 @@ resources:
 - repo: self
 
 variables:
-  iimageName: 'liminal-docker'
+  imageName: 'liminal-docker'
   tag: '$(Build.BuildId)'
 
 stages:
