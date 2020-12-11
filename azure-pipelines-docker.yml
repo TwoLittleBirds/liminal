@@ -2,14 +2,13 @@
 # Build a Docker image 
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-trigger:
-- main
+name: '$(version).$(Rev:r)'
 
 resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: '$(version).$(Rev:r)'
 
 stages:
 - stage: Build
