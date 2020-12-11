@@ -24,4 +24,4 @@ stages:
         containerRegistry: 'Docker Hub'
         repository: '6959/liminal'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile.prod'
+        Dockerfile: '/Dockerfile.prod'
