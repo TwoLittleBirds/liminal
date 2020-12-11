@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   
     return (
       <div className={classes.root}>      
-        This is the About Page...
+        This is the New About Page...
       </div>
     );
   }
