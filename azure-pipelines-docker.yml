@@ -4,6 +4,9 @@
 
 name: $(Build.BuildId)'
 
+trigger:
+- main
+
 resources:
 - repo: self
 
@@ -28,3 +31,9 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/dockerfile.prod'
         tags: |
           $(tag)
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'container'
+        publishLocation: 'Container'
