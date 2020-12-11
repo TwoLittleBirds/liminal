@@ -10,10 +10,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  imageName: 'liminal-docker'
-  tag: '$(Build.BuildId)'
-
 stages:
 - stage: Build
   displayName: Build image
@@ -24,16 +20,8 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
       inputs:
-        repository: $(imageName)
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/dockerfile.prod'
-        tags: |
-          $(tag)
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'container'
-        publishLocation: 'Container'
+        containerRegistry: 'Docker Hub'
+        repository: '6959/liminal'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile.prod'
