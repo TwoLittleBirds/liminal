@@ -58,8 +58,8 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-- task: PublishBuildArtifacts@1
-  inputs: 
-    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
-    ArtifactName: 'drop' # output artifact named drop
+#- task: PublishBuildArtifacts@1
+#  inputs: 
+#    pathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+#    ArtifactName: 'drop' # output artifact named drop
 
