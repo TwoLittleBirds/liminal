@@ -13,8 +13,8 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/PermDeviceInformation';
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import Home from '../Views/Home';
 import About from '../Views/About';
@@ -157,7 +157,7 @@ export default function MainLayout() {
           <List>
             {['Home', 'About'].map((text, index) => (
               <ListItem button key={text} component={Link} to={"/" + text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <InfoIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
