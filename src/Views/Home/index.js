@@ -1,5 +1,9 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
+import logo from '../../Images/logo192.png'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,8 +16,32 @@ const useStyles = makeStyles((theme) => ({
   
     return (
       <div className={classes.root}>      
-        This is my real Home Page...
-      </div>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
+            <Grid item xs={4} alignItems="center" justify="center">
+                <img src={logo} alt="limianl logo"/>
+            </Grid>
+            <Grid item xs={4} alignItems="center" justify="center">
+                  <Typography variant="h4" gutterBottom align='center'>
+                    An authentication and authorisation solution that works for you
+                  </Typography>
+                  <Typography variant="body1" gutterBottom  align='center'>
+                      Identity and access control solutions for modern applications built on .Net, 
+                      including single sign-on, identity management, authorisation, and API security.
+                  </Typography>
+                  <Typography variant="body1" gutterBottom  align='center'>
+                      Based on successful open source projects like IdentityServer,
+                      with the flexibility to meet your requirements.
+                  </Typography>
+            </Grid>  
+          </Grid>
+      </div> 
     );
   }
 
