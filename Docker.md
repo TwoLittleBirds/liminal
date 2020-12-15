@@ -11,3 +11,7 @@ docker-compose up --build
 Update Azure App Service container
 az webapp config container set --name liminal-d --resource-group liminal-d-resourcegroup --docker-registry-server-user 6959 
 --docker-registry-server-password <password> --docker-custom-image-name 6959/liminal:<tag>
+
+
+Test circuit breaker
+node ./src/Components/CircuitBreaker.mock.js

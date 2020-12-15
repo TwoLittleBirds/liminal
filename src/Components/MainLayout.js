@@ -152,7 +152,7 @@ export default function MainLayout() {
           <Divider />
           <List>
             {['Home', 'About'].map((text, index) => (
-              <MenuItem text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
+              <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
             ))}
           </List>
         </Drawer>

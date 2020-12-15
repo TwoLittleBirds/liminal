@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
           justify="center"
           style={{ minHeight: '100vh' }}
         >
-            <Grid item xs={4} alignItems="center" justify="center">
+            <Grid item xs={4}>
                 <img src={logo} alt="limianl logo"/>
             </Grid>
-            <Grid item xs={4} alignItems="center" justify="center">
+            <Grid item xs={4}>
                   <Typography variant="h4" gutterBottom align='center'>
                     An authentication and authorisation solution that works for you
                   </Typography>

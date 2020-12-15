@@ -4,12 +4,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 
-function MenuItem({text, open, link, icon}) {
+function MenuItem({index, text, open, link, icon}) {
     return (
-      <div>
+      <div key={index}>
         <Tooltip title={text} placement="right" disableHoverListener={open} arrow> 
-        <ListItem button key={text} component={link} to={"/" + text}>
-            <ListItemIcon>{icon}</ListItemIcon>
+        <ListItem button component={link} to={"/" + text}>
+            <ListItemIcon >{icon}</ListItemIcon>
             <ListItemText primary={text} />
         </ListItem>
         </Tooltip>
