@@ -15,3 +15,8 @@ az webapp config container set --name liminal-d --resource-group liminal-d-resou
 
 Test circuit breaker
 node ./src/Components/CircuitBreaker.mock.js
+
+
+Test circuit opossum breaker
+node ./src/Components/CircuitBreaker.opossum.js
+
