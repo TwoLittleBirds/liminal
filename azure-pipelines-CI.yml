@@ -48,7 +48,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - script: |
-    CI=true npm test
+    CI=true npm test -- --coverage
   displayName: 'npm test and coverage'
 
 
