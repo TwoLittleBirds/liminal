@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:ci": "react-scripts test --ci --coverage --coverageReporters=cobertura --reporters=default --reporters=jest-junit --watchAll=false"
+    "test:ci": "react-scripts test --ci --coverage --coverageReporters=cobertura --reporters=default --reporters=jest-junit --testResultsProcessor=jest-sonar-reporter --watchAll=false"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest-sonar-reporter": "^2.0.0"
+  }
 }

@@ -31,7 +31,7 @@ steps:
       # Put one key=value per line, example:
       sonar.exclusions=**/node_modules/*, **/__tests__/*, **/__tests__/Components/*
       sonar.flex.cobertura.reportPaths=$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
-      sonar.genericcoverage.unitTestReportPaths=junit.xml
+      sonar.genericcoverage.unitTestReportPaths=test-report.xml
 
 - script: |
     npm install
