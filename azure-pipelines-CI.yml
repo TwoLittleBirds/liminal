@@ -30,7 +30,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       sonar.exclusions=**/node_modules/*, **/__tests__/*, **/__tests__/Components/*
-      sonar.genericcoverage.unitTestReportPaths=/coverage/cobertura-coverage.xml
+      sonar.genericcoverage.unitTestReportPaths=$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
 
 - script: |
     npm install
