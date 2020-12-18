@@ -7,10 +7,15 @@ const MenuIcons = {
   };
   
   const MenuIcon = ({name})=>{
+      const home = 'Home';
       let Icon = MenuIcons[name];
-      return(
-          <Icon name={name}/>
-      );
+
+      if(Icon){
+        return(<Icon name={name} data-testid={name}/>);
+        } else {
+            Icon = MenuIcons[home];
+            return(<Icon name={home} data-testid={home}/>);
+        }
   }
   
   export default MenuIcon

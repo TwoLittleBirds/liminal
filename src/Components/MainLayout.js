@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -91,7 +91,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainLayout() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -113,7 +112,7 @@ export default function MainLayout() {
       >
         <Toolbar data-testid="menu-toolbar">
           <IconButton
-            data-testid="menu-iconbutton"
+            data-testid="menu-iconclose"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -145,12 +144,12 @@ export default function MainLayout() {
           }}
         >
           <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <MenuCloseIcon /> : <MenuOpenIcon />}
+            <IconButton onClick={handleDrawerClose} data-testid="menu-iconopen">
+              <MenuOpenIcon />
             </IconButton>
           </div>
-          <Divider />
-          <List>
+          <Divider data-testid="menu-divider"/>
+          <List data-testid="menu-options">
             {['Home', 'About'].map((text, index) => (
               <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
             ))}

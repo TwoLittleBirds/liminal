@@ -13,10 +13,5 @@ az webapp config container set --name liminal-d --resource-group liminal-d-resou
 --docker-registry-server-password <password> --docker-custom-image-name 6959/liminal:<tag>
 
 
-Test circuit breaker
-node ./src/Components/CircuitBreaker.mock.js
 
-
-Test circuit opossum breaker
-node ./src/Components/CircuitBreaker.opossum.js
 

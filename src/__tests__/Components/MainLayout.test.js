@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MainLayout from '../MainLayout';
+import MainLayout from '../../Components/MainLayout';
 
 
 test('renders appbar', () => {
@@ -16,11 +16,18 @@ test('renders toolbar', () => {
   expect(elem).toBeInTheDocument();
 });
 
-test('renders iconbutton', () => {
+test('renders iconbutton open', () => {
     render(<MainLayout />);
   
-    const elem = screen.getByTestId("menu-iconbutton");
+    const elem = screen.getByTestId("menu-iconopen");
     expect(elem).toBeInTheDocument();
+});
+
+test('renders iconbutton close', () => {
+  render(<MainLayout />);
+
+  const elem = screen.getByTestId("menu-iconclose");
+  expect(elem).toBeInTheDocument();
 });
 
 test('renders heading', () => {
@@ -34,6 +41,20 @@ test('renders drawer', () => {
   render(<MainLayout />);
 
   const elem = screen.getByTestId("menu-drawer");
+  expect(elem).toBeInTheDocument();
+});
+
+test('renders divider', () => {
+  render(<MainLayout />);
+
+  const elem = screen.getByTestId("menu-divider");
+  expect(elem).toBeInTheDocument();
+});
+
+test('renders options', () => {
+  render(<MainLayout />);
+
+  const elem = screen.getByTestId("menu-options");
   expect(elem).toBeInTheDocument();
 });
 
