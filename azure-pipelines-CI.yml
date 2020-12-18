@@ -29,8 +29,9 @@ steps:
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
-      sonar.exclusions=**/node_modules/*
-      sonar.test.exclusions=**/__tests__/*, **/__tests__/Components/*
+      sonar.exclusions=**/node_modules/*,**/__tests__/*, **/__tests__/Components/*
+      sonar.tests=src
+      sonar.test.inclusions=**/*.test.js
       sonar.flex.cobertura.reportPaths=$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml
       sonar.testExecutionReportPaths=$(System.DefaultWorkingDirectory)/test-report.xml
 
