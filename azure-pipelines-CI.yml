@@ -29,7 +29,7 @@ steps:
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
-      sonar.exclusions=**/node_modules/*, **/__tests__/*
+      sonar.exclusions=**/node_modules/*, **/__tests__/*, **/__tests__/Components/*
 
 - script: |
     npm version patch
