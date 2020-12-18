@@ -49,7 +49,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - script: |
-    CI=true npm test -- --coverage --coverageReporters=cobertura --reporters=jest-junit 
+    npm run test:ci 
   displayName: 'npm test and coverage'
 
 - task: PublishTestResults@2
