@@ -33,7 +33,6 @@ steps:
       sonar.genericcoverage.unitTestReportPaths=/coverage/cobertura-coverage.xml
 
 - script: |
-    npm version patch
     npm install
     npm run build
   displayName: 'npm install and build'
@@ -41,13 +40,7 @@ steps:
 - task: WhiteSource Bolt@20
   inputs:
     advance: true
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'build'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    
+   
 - script: |
     npm run test:ci 
   displayName: 'npm test and coverage'
