@@ -48,9 +48,13 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     
 - script: |
-    CI=true npm test -- --coverage
+    CI=true npm test -- --coverage --coverageReporters=cobertura 
   displayName: 'npm test and coverage'
 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
 
 - task: SonarCloudAnalyze@1
 
