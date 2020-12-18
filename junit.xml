@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="12" failures="0" errors="0" time="3.796">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2020-12-18T20:25:27" time="1.823" tests="3">
+    <testcase classname=" with Home renders Home icon" name=" with Home renders Home icon" time="0.048">
+    </testcase>
+    <testcase classname=" with About renders About icon" name=" with About renders About icon" time="0.005">
+    </testcase>
+    <testcase classname=" with noIcon renders Home icon" name=" with noIcon renders Home icon" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2020-12-18T20:25:27" time="2.152" tests="1">
+    <testcase classname=" renders learn react link" name=" renders learn react link" time="0.174">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2020-12-18T20:25:27" time="2.512" tests="8">
+    <testcase classname=" renders appbar" name=" renders appbar" time="0.161">
+    </testcase>
+    <testcase classname=" renders toolbar" name=" renders toolbar" time="0.05">
+    </testcase>
+    <testcase classname=" renders iconbutton open" name=" renders iconbutton open" time="0.058">
+    </testcase>
+    <testcase classname=" renders iconbutton close" name=" renders iconbutton close" time="0.044">
+    </testcase>
+    <testcase classname=" renders heading" name=" renders heading" time="0.053">
+    </testcase>
+    <testcase classname=" renders drawer" name=" renders drawer" time="0.05">
+    </testcase>
+    <testcase classname=" renders divider" name=" renders divider" time="0.036">
+    </testcase>
+    <testcase classname=" renders options" name=" renders options" time="0.042">
+    </testcase>
+  </testsuite>
+</testsuites>
