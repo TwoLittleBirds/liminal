@@ -11,10 +11,10 @@ const MenuIcons = {
       let Icon = MenuIcons[name];
 
       if(Icon){
-        return(<Icon name={name} data-testid={name}/>);
+        return(<Icon name={name} data-testid='icon-svg'/>);
         } else {
             Icon = MenuIcons[home];
-            return(<Icon name={home} data-testid={home}/>);
+            return(<Icon name={home} data-testid='icon-svg'/>);
         }
   }
   

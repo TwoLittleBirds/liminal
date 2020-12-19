@@ -7,10 +7,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 function MenuItem({index, text, open, link, icon}) {
     return (
       <div key={index}>
-        <Tooltip title={text} placement="right" disableHoverListener={open} arrow> 
-        <ListItem button component={link} to={"/" + text}>
+        <Tooltip data-testid='menu-tooltip' title={text} placement="right" disableHoverListener={open} arrow> 
+        <ListItem data-testid='menu-container' button component={link} to={"/" + text}>
             <ListItemIcon >{icon}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText data-testid='menu-text' primary={text} />
         </ListItem>
         </Tooltip>
       </div>
