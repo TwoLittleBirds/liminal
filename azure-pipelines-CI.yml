@@ -53,6 +53,13 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/junit.xml'
 
+- task: reportgenerator@4
+  displayName: Converting lcov to cobertura
+  inputs:
+    reports: '$(System.DefaultWorkingDirectory)/coverage/lcov.info'
+    targetdir: '$(System.DefaultWorkingDirectory)/coverage'
+    reporttypes: 'Cobertura'
+
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
