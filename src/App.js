@@ -4,7 +4,7 @@ import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
 const client = new AppConfigurationClient(
-  'Endpoint=https://reactfeatureflags.azconfig.io;Id=rbPk-lw-s0:0M5+JsBX32eVrLyi4opr;Secret=/SUxxNQpQfWS560BKlTTM3eQErrIA5nHW6B69M+T/yI='
+  'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 );
 
 let _isMounted = false;
