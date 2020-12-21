@@ -13,15 +13,12 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {flags: []};
-console.log("ctor");
   }
 
   async componentDidMount(){
-    console.log("componentDidMount");
     _isMounted = true;
     const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
     let flags = [];
-    console.log("after the call");
     for await (const setting of settings) {
       const jsonObj = JSON.parse(setting.value);
       const obj = {name:jsonObj.id, isActive:jsonObj.enabled};
@@ -38,7 +35,6 @@ console.log("ctor");
   }
 
   render(){
-    console.log("render");
     return(
       <FlagsProvider value={this.state.flags}>
         <MainLayout/>
