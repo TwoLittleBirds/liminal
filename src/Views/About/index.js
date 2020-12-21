@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
                     {error => `Something went wrong: ${error.message}`}
                   </Async.Rejected>
                   <Async.Fulfilled>
-                    {data => (<div>{data.title}</div>)}
+                    {data => data.title}
                   </Async.Fulfilled>                  
                 </Typography>
               </Async>     

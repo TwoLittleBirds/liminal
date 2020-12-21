@@ -16,6 +16,7 @@ import About from '../Views/About';
 import NotFound from '../Views/NotFound';
 import MenuItem from './MenuItem';
 import MenuIcon from './MenuIcon';
+import { Flags } from 'react-feature-flags';
 
 const drawerWidth = 240;
 
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MainLayout() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -149,11 +150,13 @@ export default function MainLayout() {
             </IconButton>
           </div>
           <Divider data-testid="menu-divider"/>
-          <List data-testid="menu-options">
-            {['Home', 'About'].map((text, index) => (
-              <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
-            ))}
-          </List>
+          <Flags authorizedFlags={["AdminOnly"]}>
+            <List data-testid="menu-options">
+              {['Home', 'About'].map((text, index) => (
+                <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
+              ))}
+            </List>
+          </Flags>
         </Drawer>
         <main className={clsx(classes.content, {
           [classes.contentShift]: open,
