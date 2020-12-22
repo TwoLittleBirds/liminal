@@ -3,11 +3,8 @@ import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
-const client = new AppConfigurationClient(
-  'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
-);
-
-let _isMounted = false;
+const FEATURE_FLAG_ENDPOINT = process.env.REACT_APP_FEATURE_FLAG_ENDPOINT;
+const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
 
 export default class App extends Component {
   constructor(props) {
@@ -16,23 +13,27 @@ export default class App extends Component {
   }
 
   async componentDidMount(){
-    _isMounted = true;
-    const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
-    let flags = [];
-    for await (const setting of settings) {
-      const jsonObj = JSON.parse(setting.value);
-      const obj = {name:jsonObj.id, isActive:jsonObj.enabled};
-      flags.push(obj);
-    }
+    this.getFeatureFlags();
+  }
 
-    if (_isMounted) {
+  getFeatureFlags = async () => {
+    try{
+
+      const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
+      let flags = [];
+
+      for await (const setting of settings) {
+        const jsonObj = JSON.parse(setting.value);
+        const obj = {name:jsonObj.id, isActive:jsonObj.enabled};
+        flags.push(obj);
+      }
+
       this.setState({ flags })
     }
-  }
+    catch(e){
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+    }
+  };
 
   render(){
     return(
