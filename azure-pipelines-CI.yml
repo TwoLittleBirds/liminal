@@ -35,6 +35,10 @@ steps:
       sonar.javascript.lcov.reportPaths=$(System.DefaultWorkingDirectory)/coverage/lcov.info
       sonar.testExecutionReportPaths=$(System.DefaultWorkingDirectory)/test-report.xml
 
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: '.env'
+    
 - script: |
     npm install
     npm run build
