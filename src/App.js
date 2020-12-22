@@ -6,6 +6,8 @@ import { FlagsProvider } from 'react-feature-flags';
 const FEATURE_FLAG_ENDPOINT = process.env.REACT_APP_FEATURE_FLAG_ENDPOINT;
 const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
 
+let _isMounted = false;
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -13,27 +15,30 @@ export default class App extends Component {
   }
 
   async componentDidMount(){
-    this.getFeatureFlags();
+    _isMounted = true;
+    await this.getFeatureFlags(_isMounted);
   }
 
-  getFeatureFlags = async () => {
+  getFeatureFlags = async (isMounted) => {
     try{
-
       const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
       let flags = [];
-
       for await (const setting of settings) {
         const jsonObj = JSON.parse(setting.value);
         const obj = {name:jsonObj.id, isActive:jsonObj.enabled};
         flags.push(obj);
       }
 
-      this.setState({ flags })
+      if (isMounted) {
+        this.setState({ flags })
+      }
     }
-    catch(e){
-
-    }
+    catch(e){}
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render(){
     return(
