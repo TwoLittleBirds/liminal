@@ -3,6 +3,9 @@ import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
+console.log("ConnectionString",process.env.REACT_APP_FEATURE_FLAG_CONNSTRING);
+console.log("env variable", process.env.REACT_APP_FEATURE_FLAG_ENDPOINT);
+
 const FEATURE_FLAG_ENDPOINT = process.env.REACT_APP_FEATURE_FLAG_ENDPOINT;
 const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
 
