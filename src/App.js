@@ -3,10 +3,8 @@ import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
-console.log("ConnectionString",process.env.REACT_APP_FEATURE_FLAG_CONNSTRING);
-console.log("env variable", process.env.REACT_APP_FEATURE_FLAG_ENDPOINT);
-
-const FEATURE_FLAG_ENDPOINT = process.env.REACT_APP_FEATURE_FLAG_ENDPOINT;
+//const FEATURE_FLAG_ENDPOINT = process.env.REACT_APP_FEATURE_FLAG_ENDPOINT;
+const FEATURE_FLAG_ENDPOINT ='Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
 
 let _isMounted = false;
