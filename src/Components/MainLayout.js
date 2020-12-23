@@ -167,6 +167,9 @@ export default function MainLayout() {
             <Route exact path="/" render={() => <Home/>} />
             <Route exact path="/Home" render={() => <Home/>} />
             <Route path="/About" render={() => <About/>} />
+            <Route path="/health">
+                <h3>The App is Healthy</h3>
+            </Route>
             <Route component={NotFound} />
           </Switch>
         </main>
