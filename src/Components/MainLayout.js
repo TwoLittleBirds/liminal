@@ -10,14 +10,13 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuCloseIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
+import { Link, BrowserRouter, Switch, Route } from "react-router-dom";
+import { Flags } from 'react-feature-flags';
+import MenuItem from './MenuItem';
+import MenuIcon from './MenuIcon';
 import Home from '../Views/Home';
 import About from '../Views/About';
 import NotFound from '../Views/NotFound';
-import MenuItem from './MenuItem';
-import MenuIcon from './MenuIcon';
-import { Flags } from 'react-feature-flags';
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -161,16 +160,11 @@ export default function MainLayout() {
         <main className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}>
-          <div className={classes.toolbar} />
-
           <Switch>
-            <Route exact path="/" render={() => <Home/>} />
-            <Route exact path="/Home" render={() => <Home/>} />
-            <Route path="/About" render={() => <About/>} />
-            <Route path="/health">
-                <h3>The App is Healthy</h3>
-            </Route>
-            <Route component={NotFound} />
+              <Route exact path="/" render={() => <Home/>} />
+              <Route path="/Home" render={() => <Home/>} />
+              <Route path="/About" render={() => <About/>} />
+              <Route component={NotFound} />
           </Switch>
         </main>
       </BrowserRouter>

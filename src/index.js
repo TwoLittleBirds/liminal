@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+
+
+const status = "Health check passed";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <main>
+        <Switch>
+          <Route path="/health-check">
+            {status}
+          </Route>
+          <Route path='/' component={App} />
+          <Route component={App} />
+        </Switch>
+      </main>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
