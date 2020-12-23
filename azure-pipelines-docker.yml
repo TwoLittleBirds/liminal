@@ -19,9 +19,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: DownloadSecureFile@1
-      inputs:
-        secureFile: '.env'
     - task: Docker@2
       inputs:
         containerRegistry: 'Docker Hub'
