@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
             </Grid>
             <Grid item xs={4}>
                   <Typography variant="h4" gutterBottom align='center'>
-                    An authentication and authorisation solution that work for you
+                    An authentication and authorisation solution that works for you
                   </Typography>
                   <Typography variant="body1" gutterBottom  align='center'>
                       Identity and access control solutions for modern applications built on .Net, 
