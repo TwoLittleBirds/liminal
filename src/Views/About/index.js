@@ -7,10 +7,14 @@ import { makeStyles } from '@material-ui/core/styles';
 var pjson = require('../../../package.json');
 
 const loadWebApiVersionAsync = async () => {
-  const response = await fetch(`https://liminal-d-webapi.azurewebsites.net/version`)
-  if (!response.ok) throw new Error(response.statusText)
+  const response = await fetch(`https://liminal-d-webapi.azurewebsites.net/version`, 
+  {
+    method: 'GET',
+    headers: {'Access-Control-Allow-Origin': '*'}
+  })
+  if (!response.ok) throw new Error(response.status)
 
-  return response.json()
+  return response.text()
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -30,9 +34,11 @@ const useStyles = makeStyles((theme) => ({
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: '100vh' }}
-        >
+          style={{ minHeight: '100vh' }}>
             <Grid item xs={4}>
+              <Typography variant="body1" gutterBottom align='center'>
+                All rights reserved © 2020 liminal - Version {pjson.version}
+              </Typography>
               <Async promiseFn={loadWebApiVersionAsync}>
                 <Typography variant="body1" gutterBottom align='center'>
                   <Async.Pending>Loading...</Async.Pending>
@@ -40,14 +46,11 @@ const useStyles = makeStyles((theme) => ({
                     {error => `Something went wrong: ${error.message}`}
                   </Async.Rejected>
                   <Async.Fulfilled>
-                    using liminal-webapi v{data => data}
+                     {data => `using limina-d-webapi v${data}`}
                   </Async.Fulfilled>                  
                 </Typography>
               </Async>     
-              <Typography variant="body1" gutterBottom align='center'>
-                All rights reserved © 2020 liminal - Version {pjson.version}
-              </Typography>
-            </Grid>  
+            </Grid>
           </Grid>
       </div>
     );
