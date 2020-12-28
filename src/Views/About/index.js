@@ -6,8 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 var pjson = require('../../../package.json');
 
-const loadJsonAsync = async ({id}) => {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+const loadWebApiVersionAsync = async () => {
+  const response = await fetch(`https://liminal-d-webapi.azurewebsites.net/version`)
   if (!response.ok) throw new Error(response.statusText)
 
   return response.json()
@@ -33,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
           style={{ minHeight: '100vh' }}
         >
             <Grid item xs={4}>
-              <Async promiseFn={loadJsonAsync} id={1}>
+              <Async promiseFn={loadWebApiVersionAsync}>
                 <Typography variant="body1" gutterBottom align='center'>
                   <Async.Pending>Loading...</Async.Pending>
                   <Async.Rejected>
                     {error => `Something went wrong: ${error.message}`}
                   </Async.Rejected>
                   <Async.Fulfilled>
-                    {data => data.title}
+                    using liminal-webapi v{data => data}
                   </Async.Fulfilled>                  
                 </Typography>
               </Async>     
