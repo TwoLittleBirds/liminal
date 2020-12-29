@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
-
+import { useAppInsightsContext } from "@microsoft/applicationinsights-react-js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
   
   export default function NotFound() {
     const classes = useStyles();
-  
+    const appInsights = useAppInsightsContext();
+    
+    appInsights.trackMetric("Component 'NotFound' is in use");
+
     return (
       <div className={classes.root}>      
         <Grid

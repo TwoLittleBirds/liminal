@@ -3,6 +3,9 @@ import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
+import { AppInsightsContext } from "@microsoft/applicationinsights-react-js";
+import { reactPlugin } from "./Components/AppInsights";
+
 const FEATURE_FLAG_ENDPOINT = 'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 
 let _isMounted = false;
@@ -42,9 +45,11 @@ export default class App extends Component {
 
   render(){
     return(
-      <FlagsProvider value={this.state.flags}>
-        <MainLayout/>
-      </FlagsProvider>
+      <AppInsightsContext.Provider value={reactPlugin}>
+        <FlagsProvider value={this.state.flags}>
+          <MainLayout/>
+        </FlagsProvider>
+      </AppInsightsContext.Provider>
     )
   }
 }

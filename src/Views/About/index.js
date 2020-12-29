@@ -3,6 +3,7 @@ import Async from 'react-async';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
+import { useAppInsightsContext } from "@microsoft/applicationinsights-react-js";
 
 var pjson = require('../../../package.json');
 
@@ -23,9 +24,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  export default function About() {
+export default function About() {
     const classes = useStyles();
-  
+    const appInsights = useAppInsightsContext();
+    
+    appInsights.trackMetric("Component 'About Page' is in use");
+
     return (
       <div className={classes.root}>      
         <Grid
@@ -55,4 +59,5 @@ const useStyles = makeStyles((theme) => ({
       </div>
     );
   }
+
 
