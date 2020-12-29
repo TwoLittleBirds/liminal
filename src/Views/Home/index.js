@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../Images/logo192.png'
-import { useAppInsightsContext } from "@microsoft/applicationinsights-react-js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,12 +10,9 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-export default function Home() {
+function Home() {
     const classes = useStyles();
-    const appInsights = useAppInsightsContext();
-    
-    appInsights.trackMetric("Component 'Home Page' is in use");
-  
+
     return (
       <div className={classes.root}>      
         <Grid
@@ -47,3 +43,5 @@ export default function Home() {
       </div> 
     );
   }
+
+  export default Home;

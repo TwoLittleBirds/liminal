@@ -1,5 +1,6 @@
 {
     "appService.showBuildDuringDeployPrompt": false,
     "appService.defaultWebAppToDeploy": "/subscriptions/2c56e750-90f9-49e6-ad9a-5de579b4d854/resourceGroups/liminal-node/providers/Microsoft.Web/sites/liminal",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "git.ignoreLimitWarning": true
 }
