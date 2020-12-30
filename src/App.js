@@ -3,36 +3,34 @@ import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
 
-import { AppInsightsContext } from "@microsoft/applicationinsights-react-js";
-import { reactPlugin } from "./Components/AppInsights";
-
 const FEATURE_FLAG_ENDPOINT = 'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 
-let _isMounted = false;
-
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {flags: []};
+
+    this._isMounted = false;
   }
 
   async componentDidMount(){
-    _isMounted = true;
-    await this.getFeatureFlags(_isMounted);
+    this._isMounted = true;
+    await this.getFeatureFlags();
   }
 
-  getFeatureFlags = async (isMounted) => {
+  getFeatureFlags = async () => {
     try{
       const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
       const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
       let flags = [];
+      
       for await (const setting of settings) {
         const jsonObj = JSON.parse(setting.value);
         const obj = {name:jsonObj.id, isActive:jsonObj.enabled};
         flags.push(obj);
       }
 
-      if (isMounted) {
+      if (this._isMounted) {
         this.setState({ flags })
       }
     }
@@ -45,14 +43,12 @@ export default class App extends Component {
 
   render(){
     return(
-      <AppInsightsContext.Provider value={reactPlugin}>
-        <FlagsProvider value={this.state.flags}>
-          <MainLayout/>
-        </FlagsProvider>
-      </AppInsightsContext.Provider>
+      <FlagsProvider value={this.state.flags}>
+        <MainLayout/>
+      </FlagsProvider>
     )
   }
 }
 
-
+export default App;
 

@@ -18,6 +18,9 @@ import Home from '../Views/Home';
 import About from '../Views/About';
 import NotFound from '../Views/NotFound';
 
+import { getTelemetryService } from './TelemetryService';
+import TelemetryProvider from './TelemetryProvider';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -102,73 +105,77 @@ export default function MainLayout() {
     setOpen(false);
   };
 
+  let telemetryService = null;
+
   return (
     <div className={classes.root}>
-      <AppBar
-        data-testid="menu-appbar"
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar data-testid="menu-toolbar">
-          <IconButton
-            data-testid="menu-iconclose"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuCloseIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap data-testid="menu-heading">
-            Liminal
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <BrowserRouter>
-        <Drawer
-          data-testid="menu-drawer"      
-          variant="permanent"
-          className={clsx(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+        <AppBar
+          data-testid="menu-appbar"
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
           })}
-          classes={{
-            paper: clsx({
+        >
+          <Toolbar data-testid="menu-toolbar">
+            <IconButton
+              data-testid="menu-iconclose"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuCloseIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap data-testid="menu-heading">
+              Liminal
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <BrowserRouter>
+        <TelemetryProvider instrumentationKey="51a90462-367c-4f6c-afb5-5596df9089c3" after={() => {  telemetryService = getTelemetryService() }}>
+          <Drawer
+            data-testid="menu-drawer"      
+            variant="permanent"
+            className={clsx(classes.drawer, {
               [classes.drawerOpen]: open,
               [classes.drawerClose]: !open,
-            }),
-          }}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose} data-testid="menu-iconopen">
-              <MenuOpenIcon />
-            </IconButton>
-          </div>
-          <Divider data-testid="menu-divider"/>
-          <Flags authorizedFlags={["AdminOnly"]}>
-            <List data-testid="menu-options">
-              {['Home', 'About'].map((text, index) => (
-                <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
-              ))}
-            </List>
-          </Flags>
-        </Drawer>
-        <main className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}>
-          <Switch>
-              <Route exact path="/" render={() => <Home/>} />
-              <Route path="/Home" render={() => <Home/>} />
-              <Route path="/About" render={() => <About/>} />
-              <Route component={NotFound} />
-          </Switch>
-        </main>
-      </BrowserRouter>
+            })}
+            classes={{
+              paper: clsx({
+                [classes.drawerOpen]: open,
+                [classes.drawerClose]: !open,
+              }),
+            }}
+          >
+            <div className={classes.toolbar}>
+              <IconButton onClick={handleDrawerClose} data-testid="menu-iconopen">
+                <MenuOpenIcon />
+              </IconButton>
+            </div>
+            <Divider data-testid="menu-divider"/>
+            <Flags authorizedFlags={["AdminOnly"]}>
+              <List data-testid="menu-options">
+                {['Home', 'About'].map((text, index) => (
+                  <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
+                ))}
+              </List>
+            </Flags>
+          </Drawer>
+          <main className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}>
+            <Switch>
+                <Route exact path="/" render={() => <Home/>} />
+                <Route path="/Home" render={() => <Home/>} />
+                <Route path="/About" render={() => <About/>} />
+                <Route component={NotFound} />
+            </Switch>
+          </main>
+          </TelemetryProvider>
+        </BrowserRouter>
     </div>
   );
 }

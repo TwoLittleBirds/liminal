@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 
+
 var pjson = require('../../../package.json');
 
 const loadWebApiVersionAsync = async () => {
@@ -12,8 +13,11 @@ const loadWebApiVersionAsync = async () => {
     method: 'GET',
     headers: {'Access-Control-Allow-Origin': '*'}
   })
-  if (!response.ok) throw new Error(response.status)
-
+  if (!response.ok)
+  {
+    const error = new Error(response.status);
+    throw error;
+  } 
   return response.text()
 }
 
