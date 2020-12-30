@@ -32,6 +32,7 @@ const createTelemetryService = () => {
                 maxBatchInterval: 0,
                 disableFetchTracking: false,
                 extensions: [reactPlugin],
+                autoTrackPageVisitTime: true,
                 extensionConfig: {
                     [reactPlugin.identifier]: {
                         history: browserHistory

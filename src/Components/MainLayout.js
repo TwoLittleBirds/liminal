@@ -135,7 +135,7 @@ export default function MainLayout() {
           </Toolbar>
         </AppBar>
         <BrowserRouter>
-        <TelemetryProvider instrumentationKey="51a90462-367c-4f6c-afb5-5596df9089c3" after={() => {  telemetryService = getTelemetryService() }}>
+        <TelemetryProvider instrumentationKey="a2b19403-81a5-4894-ab9a-bc83fe042d1d" after={() => {  telemetryService = getTelemetryService() }}>
           <Drawer
             data-testid="menu-drawer"      
             variant="permanent"
