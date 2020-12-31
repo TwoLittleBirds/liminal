@@ -17,8 +17,6 @@ import MenuIcon from './MenuIcon';
 import Home from '../Views/Home';
 import About from '../Views/About';
 import NotFound from '../Views/NotFound';
-
-import { getTelemetryService } from './TelemetryService';
 import TelemetryProvider from './TelemetryProvider';
 
 const drawerWidth = 240;
@@ -105,8 +103,6 @@ export default function MainLayout() {
     setOpen(false);
   };
 
-  let telemetryService = null;
-
   return (
     <div className={classes.root}>
         <AppBar
@@ -135,7 +131,7 @@ export default function MainLayout() {
           </Toolbar>
         </AppBar>
         <BrowserRouter>
-        <TelemetryProvider instrumentationKey="a2b19403-81a5-4894-ab9a-bc83fe042d1d" after={() => {  telemetryService = getTelemetryService() }}>
+        <TelemetryProvider instrumentationKey="a2b19403-81a5-4894-ab9a-bc83fe042d1d">
           <Drawer
             data-testid="menu-drawer"      
             variant="permanent"

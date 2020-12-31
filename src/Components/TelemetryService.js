@@ -47,5 +47,9 @@ const createTelemetryService = () => {
     return {reactPlugin, appInsights, initialize};
 };
 
-export const ai = createTelemetryService();
+export const trackException = (error) => {
+    appInsights.trackException(error);
+}
+
+export const telemetryService = createTelemetryService();
 export const getTelemetryService = () => appInsights;

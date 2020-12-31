@@ -3,7 +3,7 @@ import Async from 'react-async';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
-
+import { trackException } from '../../Components/TelemetryService';
 
 var pjson = require('../../../package.json');
 
@@ -16,6 +16,7 @@ const loadWebApiVersionAsync = async () => {
   if (!response.ok)
   {
     const error = new Error(response.status);
+    trackException(error);
     throw error;
   } 
   return response.text()

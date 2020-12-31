@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import  MainLayout from './Components/MainLayout';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { FlagsProvider } from 'react-feature-flags';
+import ErrorBoundary from './Components/ErrorBoundary';
+import { trackException } from './Components/TelemetryService';
 
 const FEATURE_FLAG_ENDPOINT = 'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 
@@ -34,7 +36,9 @@ class App extends Component {
         this.setState({ flags })
       }
     }
-    catch(e){}
+    catch(e){
+      trackException(e);
+    }
   };
 
   componentWillUnmount() {
@@ -43,9 +47,11 @@ class App extends Component {
 
   render(){
     return(
-      <FlagsProvider value={this.state.flags}>
-        <MainLayout/>
-      </FlagsProvider>
+      <ErrorBoundary>
+        <FlagsProvider value={this.state.flags}>
+          <MainLayout/>
+        </FlagsProvider>
+      </ErrorBoundary>
     )
   }
 }

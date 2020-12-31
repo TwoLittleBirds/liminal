@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {withAITracking} from '@microsoft/applicationinsights-react-js';
-import {ai} from './TelemetryService';
+import {telemetryService} from './TelemetryService';
 import {withRouter} from 'react-router-dom';
 
 /**
@@ -18,11 +18,9 @@ class TelemetryProvider extends Component {
         const {initialized} = this.state;
         const AppInsightsInstrumentationKey = this.props.instrumentationKey; // PUT YOUR KEY HERE
         if (!Boolean(initialized) && Boolean(AppInsightsInstrumentationKey) && Boolean(history)) {
-            ai.initialize(AppInsightsInstrumentationKey, history);
+            telemetryService.initialize(AppInsightsInstrumentationKey, history);
             this.setState({initialized: true});
         }
-
-        this.props.after();
     }
 
     render() {
@@ -35,4 +33,4 @@ class TelemetryProvider extends Component {
     }
 }
 
-export default withRouter(withAITracking(ai.reactPlugin, TelemetryProvider));
+export default withRouter(withAITracking(telemetryService.reactPlugin, TelemetryProvider));
