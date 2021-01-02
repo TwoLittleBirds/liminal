@@ -3,19 +3,21 @@ import Async from 'react-async';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
+import fetchRetry  from '../../Components/FetchRetry'
 
 var pjson = require('../../../package.json');
 
 const loadWebApiVersionAsync = async () => {
-  const response = await fetch(`https://liminal-d-webapi.azurewebsites.net/version`, 
+  const response = await fetchRetry(`https://liminal-d-webapi.azurewebsites.net/version`, 
   {
     method: 'GET',
     headers: {'Access-Control-Allow-Origin': '*'}
-  })
-  if (!response.ok)
-  {
-    throw new Error(response.status);
+  }, 3)
+
+  if (response === undefined) {
+    throw new Error("Error in call to WebAPI");
   } 
+
   return response.text()
 }
 
