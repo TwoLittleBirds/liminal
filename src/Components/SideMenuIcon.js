@@ -1,21 +1,21 @@
 import Home  from '@material-ui/icons/Home';
 import About  from '@material-ui/icons/PermDeviceInformation';
 
-const MenuIcons = {
+const SideMenuIcons = {
     Home,
     About
   };
   
-  const MenuIcon = ({name})=>{
+  const SideMenuIcon = ({name})=>{
       const home = 'Home';
-      let Icon = MenuIcons[name];
+      let Icon = SideMenuIcons[name];
 
       if(Icon){
         return(<Icon name={name} data-testid='icon-svg'/>);
         } else {
-            Icon = MenuIcons[home];
+            Icon = SideMenuIcons[home];
             return(<Icon name={home} data-testid='icon-svg'/>);
         }
   }
   
-  export default MenuIcon
+  export default SideMenuIcon

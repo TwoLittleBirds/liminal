@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 
-function MenuItem({index, text, open, link, icon}) {
+function SideMenuItem({index, text, open, link, icon}) {
     return (
       <div key={index}>
         <Tooltip data-testid='menu-tooltip' title={text} placement="right" disableHoverListener={open} arrow> 
@@ -17,4 +17,4 @@ function MenuItem({index, text, open, link, icon}) {
     );
   }
 
-  export default  MenuItem;
+  export default SideMenuItem;

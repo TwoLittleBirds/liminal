@@ -5,15 +5,18 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MenuCloseIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link, BrowserRouter, Switch, Route } from "react-router-dom";
 import { Flags } from 'react-feature-flags';
-import MenuItem from './MenuItem';
-import MenuIcon from './MenuIcon';
+import SideMenuItem from './SideMenuItem';
+import MenuIcon from './SideMenuIcon';
 import Home from '../Views/Home';
 import About from '../Views/About';
 import NotFound from '../Views/NotFound';
@@ -22,79 +25,99 @@ import TelemetryProvider from './TelemetryProvider';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  content: {
-    zIndex: theme.zIndex.drawer + 1,
-    marginLeft: theme.spacing(9) + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  contentShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(7) + 1,
+    grow: {
+        flexGrow: 1,
+      },
+      menuButton: {
+        marginRight: 36,
+      },
+      title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+          display: 'block',
+        },
+      },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
     },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-}));
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    content: {
+      zIndex: theme.zIndex.drawer + 1,
+      marginLeft: theme.spacing(9) + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    contentShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    hide: {
+      display: 'none',
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(7) + 1,
+      },
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+    },
+  }));
 
-export default function MainLayout() {
+export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+ 
+  const isMenuOpen = Boolean(anchorEl);
+ 
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -103,8 +126,25 @@ export default function MainLayout() {
     setOpen(false);
   };
 
+  const menuId = 'primary-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+        {['Profile', 'Account'].map((text, index) => (
+            <MenuItem onClick={handleMenuClose}>{text}</MenuItem>
+        ))}
+    </Menu>
+  );
+
   return (
-    <div className={classes.root}>
+    <div className={classes.grow}>
         <AppBar
           data-testid="menu-appbar"
           position="fixed"
@@ -112,8 +152,8 @@ export default function MainLayout() {
             [classes.appBarShift]: open,
           })}
         >
-          <Toolbar data-testid="menu-toolbar">
-            <IconButton
+        <Toolbar data-testid="menu-toolbar">
+        <IconButton
               data-testid="menu-iconclose"
               color="inherit"
               aria-label="open drawer"
@@ -128,9 +168,23 @@ export default function MainLayout() {
             <Typography variant="h6" noWrap data-testid="menu-heading">
               Liminal
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <BrowserRouter>
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {renderMenu}
+      <BrowserRouter>
         <TelemetryProvider instrumentationKey="a2b19403-81a5-4894-ab9a-bc83fe042d1d">
           <Drawer
             data-testid="menu-drawer"      
@@ -155,7 +209,7 @@ export default function MainLayout() {
             <Flags authorizedFlags={["AdminOnly"]}>
               <List data-testid="menu-options">
                 {['Home', 'About'].map((text, index) => (
-                  <MenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
+                  <SideMenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
                 ))}
               </List>
             </Flags>
