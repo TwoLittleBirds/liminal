@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import MenuItem from '../../Components/MenuItem';
-import MenuIcon from '../../Components/MenuIcon';
+import SideMenuItem from '../../Components/SideMenuItem';
+import SideMenuIcon from '../../Components/SideMenuIcon';
 
 test('renders menu icon', () => {
   const text = 'Home';
   var open = true;
-  render(<MenuItem key='1' text={text} open={open}  icon={ <MenuIcon name={text}/> }/>);
+  render(<SideMenuItem key='1' text={text} open={open}  icon={ <SideMenuIcon name={text}/> }/>);
   const elem = screen.getByTestId('menu-container');
   expect(elem).toBeInTheDocument();
   expect(elem).toContainHTML('<svg');

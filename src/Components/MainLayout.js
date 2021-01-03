@@ -138,7 +138,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
         {['Profile', 'Account'].map((text, index) => (
-            <MenuItem onClick={handleMenuClose}>{text}</MenuItem>
+            <MenuItem key={index} onClick={handleMenuClose}>{text}</MenuItem>
         ))}
     </Menu>
   );

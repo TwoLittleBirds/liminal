@@ -1,22 +1,22 @@
 import { render, screen } from '@testing-library/react';
-import MenuIcon from '../../Components/MenuIcon';
+import SideMenuIcon from '../../Components/SideMenuIcon';
 
 test('with Home renders Home icon', () => {
-  render(<MenuIcon name='Home'/>);
+  render(<SideMenuIcon name='Home'/>);
   const iconElem = screen.getByTestId('icon-svg');
   expect(iconElem).toBeInTheDocument();
   expect(iconElem).toContainHTML('<path');
 });
 
 test('with About renders About icon', () => {
-  render(<MenuIcon name='About'/>);
+  render(<SideMenuIcon name='About'/>);
   const iconElem = screen.getByTestId('icon-svg');
   expect(iconElem).toBeInTheDocument();
   expect(iconElem).toContainHTML('<path');
 });
 
 test('with noIcon renders Home icon', () => {
-  render(<MenuIcon name='noIcon'/>);
+  render(<SideMenuIcon name='noIcon'/>);
   const iconElem = screen.getByTestId('icon-svg');
   expect(iconElem).toBeInTheDocument();
   expect(iconElem).toContainHTML('<path');
