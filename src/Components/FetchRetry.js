@@ -1,5 +1,4 @@
   export default function fetchRetry(url, options = {}, retries = 3, backoff = 300) {
-    /* 1 */
     const retryCodes = [408, 500, 502, 503, 504, 522, 524]
     return fetch(url, options)
       .then(res => {
