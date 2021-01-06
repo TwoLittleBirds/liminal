@@ -6,6 +6,7 @@ import { FlagsProvider } from 'react-feature-flags';
 import ErrorBoundary from './Components/ErrorBoundary';
 import { appInsights } from './AppInsights/AppInsights';
 
+
 const FEATURE_FLAG_ENDPOINT = 'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
 
   getFeatureFlags = async () => {
     try{
+      appInsights.trackEvent("Get Feature Flags");
       const client = new AppConfigurationClient(FEATURE_FLAG_ENDPOINT);
       const settings = client.listConfigurationSettings({labelFilter: "featureFlag"});
       let flags = [];

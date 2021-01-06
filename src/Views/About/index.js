@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import fetchRetry  from '../../Components/FetchRetry'
+import useCustomEvent from '../../AppInsights/useCustomEvent'
+import {useAppInsightsContext} from '../../AppInsights/AppInsightsContext'
 
 var pjson = require('../../../package.json');
  
@@ -15,8 +17,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function About() {
     const classes = useStyles();
+    const reactPlugin = useAppInsightsContext()
+    const trackGetWebApiVersion = useCustomEvent(reactPlugin, 'Get WebApi Version')
 
     const loadWebApiVersionAsync = async () => {
+      trackGetWebApiVersion();
       const response = await fetchRetry(`https://liminal-d-webapi.azurewebsites.net/version`, 
         {
           method: 'GET',

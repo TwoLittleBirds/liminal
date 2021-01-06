@@ -25,6 +25,10 @@ export const trackException = (error) => {
   ai.trackException(error);
 }
 
+export const trackEvent = (eventName, data) => {
+  ai.trackEvent({name: eventName}, data)
+}
+
 export default Component => withAITracking(reactPlugin, Component)
 export const appInsights = ai.appInsights
 export {reactPlugin}
