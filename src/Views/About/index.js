@@ -4,31 +4,42 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import fetchRetry  from '../../Components/FetchRetry'
+import useCustomEvent from '../../AppInsights/useCustomEvent'
+import {useAppInsightsContext} from '../../AppInsights/AppInsightsContext'
+//import {telemetryService} from '../../Components/TelemetryService';
 
 var pjson = require('../../../package.json');
-
-const loadWebApiVersionAsync = async () => {
-const response = await fetchRetry(`https://liminal-d-webapi.azurewebsites.net/version`, 
-  {
-    method: 'GET',
-    headers: {'Access-Control-Allow-Origin': '*'}
-  }, 3)  
-
-  if (response === undefined) {
-    throw new Error("Error in call to WebAPI");
-  } 
-
-  return response.text()
-}
-
+ 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-    },
-  }));
-  
+  root: {
+    display: 'flex',
+  },
+}));
+
 export default function About() {
     const classes = useStyles();
+    const reactPlugin = useAppInsightsContext()
+    const getVersion = useCustomEvent(
+      reactPlugin,
+      'Removed from Cart',
+      {},
+    )
+
+    const loadWebApiVersionAsync = async () => {
+      getVersion("loadWebApiVersionAsync");
+
+      const response = await fetchRetry(`https://liminal-d-webapi.azurewebsites.net/version`, 
+        {
+          method: 'GET',
+          headers: {'Access-Control-Allow-Origin': '*'}
+        }, 3)  
+      
+        if (response === undefined) {
+          throw new Error("Error in call to WebAPI");
+        } 
+      
+        return response.text()
+      }
 
     return (
       <div className={classes.root}>      
