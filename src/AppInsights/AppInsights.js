@@ -21,6 +21,10 @@ ReactPlugin.prototype.trackEvent = function(event, customProperties) {
   this._analyticsPlugin.trackEvent(event, customProperties)
 }
 
+export const trackException = (error) => {
+  ai.trackException(error);
+}
+
 export default Component => withAITracking(reactPlugin, Component)
 export const appInsights = ai.appInsights
 export {reactPlugin}

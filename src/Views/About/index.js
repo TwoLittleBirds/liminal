@@ -4,9 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import fetchRetry  from '../../Components/FetchRetry'
-import useCustomEvent from '../../AppInsights/useCustomEvent'
-import {useAppInsightsContext} from '../../AppInsights/AppInsightsContext'
-//import {telemetryService} from '../../Components/TelemetryService';
 
 var pjson = require('../../../package.json');
  
@@ -18,16 +15,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function About() {
     const classes = useStyles();
-    const reactPlugin = useAppInsightsContext()
-    const getVersion = useCustomEvent(
-      reactPlugin,
-      'Removed from Cart',
-      {},
-    )
 
     const loadWebApiVersionAsync = async () => {
-      getVersion("loadWebApiVersionAsync");
-
       const response = await fetchRetry(`https://liminal-d-webapi.azurewebsites.net/version`, 
         {
           method: 'GET',

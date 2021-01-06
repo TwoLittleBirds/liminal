@@ -64,7 +64,7 @@ const useComponentTracking = (reactPlugin, componentName) => {
       const additionalProperties = {'Component Name': componentName}
       reactPlugin.trackMetric(metricData, additionalProperties)
     }
-  }, [])
+  }, [componentName, reactPlugin])
 
   const trackActivity = () => {
     let t = tracking.current

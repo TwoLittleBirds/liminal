@@ -20,13 +20,7 @@ import MenuIcon from './SideMenuIcon';
 import Home from '../Views/Home';
 import About from '../Views/About';
 import NotFound from '../Views/NotFound';
-//import TelemetryProvider from './TelemetryProvider';
-
-import {
-  AppInsightsContextProvider,
-  useAppInsightsContext,
-} from '../AppInsights/AppInsightsContext'
-import useComponentTracking from '../AppInsights/useComponentTracking'
+import { AppInsightsContextProvider } from '../AppInsights/AppInsightsContext'
 
 const drawerWidth = 240;
 
@@ -192,7 +186,6 @@ export default function PrimarySearchAppBar() {
       {renderMenu}
       <BrowserRouter>
       <AppInsightsContextProvider>
-        {/* <TelemetryProvider instrumentationKey="a2b19403-81a5-4894-ab9a-bc83fe042d1d"> */}
           <Drawer
             data-testid="menu-drawer"      
             variant="permanent"
@@ -231,7 +224,6 @@ export default function PrimarySearchAppBar() {
                 <Route component={NotFound} />
             </Switch>
           </main>
-          {/* </TelemetryProvider> */}
           </AppInsightsContextProvider>
         </BrowserRouter>
     </div>

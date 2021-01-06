@@ -1,5 +1,5 @@
 import React from 'react';
-import { trackException } from './TelemetryService';
+import { trackException } from '../AppInsights/AppInsights';
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
