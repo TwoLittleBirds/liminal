@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 function Home() {
+  useEffect(() => {
+    document.title = "Liminal - Home"
+  }, []);
+  
     const classes = useStyles();
 
     return (

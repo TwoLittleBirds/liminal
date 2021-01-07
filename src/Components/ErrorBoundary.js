@@ -1,5 +1,6 @@
 import React from 'react';
 import { trackException } from '../AppInsights/AppInsights';
+import { SeverityLevel } from '@microsoft/applicationinsights-web';
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class ErrorBoundary extends React.Component {
     }
   
     componentDidCatch(error, errorInfo) {
-      trackException(error);
+      trackException({ error: new Error(error), severityLevel: SeverityLevel.Error })
     }
   
     render() {
