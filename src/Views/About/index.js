@@ -3,7 +3,9 @@ import Async from 'react-async';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
+import { Flags } from 'react-feature-flags';
 import fetchRetry  from '../../Components/FetchRetry'
+import NotFound from '../NotFound';
 
 var pjson = require('../../../package.json');
  
@@ -36,13 +38,14 @@ export default function About() {
 
     return (
       <div className={classes.root}>      
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '100vh' }}>
+        <Flags authorizedFlags={["AdminOnly"]}>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}>
             <Grid item xs={4}>
               <Typography variant="body1" gutterBottom align='center'>
                 All rights reserved © 2020 liminal - Version {pjson.version}
@@ -54,12 +57,13 @@ export default function About() {
                     {error => `Something went wrong: ${error.message}`}
                   </Async.Rejected>
                   <Async.Fulfilled>
-                     {data => `using limina-d-webapi v${data}`}
+                    {data => `using limina-d-webapi v${data}`}
                   </Async.Fulfilled>                  
                 </Typography>
               </Async>     
-            </Grid>
-          </Grid>
+            </Grid>   
+            </Grid>           
+        </Flags>
       </div>
     );
   }

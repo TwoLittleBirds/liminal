@@ -218,7 +218,7 @@ export default function PrimarySearchAppBar() {
             [classes.contentShift]: open,
           })}>
             <Switch>
-                <Route exact path="/" render={() => <Home/>} />
+                <Route exact path="/" render={() => <Home/>}/>
                 <Route path="/Home" render={() => <Home/>} />
                 <Route path="/About" render={() => <About/>} />
                 <Route component={NotFound} />
