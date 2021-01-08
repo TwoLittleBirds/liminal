@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid'
 import { Flags } from 'react-feature-flags';
 import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../Images/logo192.png'
+import Box from '@material-ui/core/Box';
+import Copyleft from '../../Components/Copyleft'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,7 +45,10 @@ function Home() {
                         Based on successful open source projects like IdentityServer,
                         with the flexibility to meet your requirements.
                     </Typography>
-              </Grid>                
+              </Grid> 
+              <Box mt={8}>
+                <Copyleft />
+              </Box>                             
             </Grid>
           </Flags>
       </div> 

@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
 import { Flags } from 'react-feature-flags';
 import fetchRetry  from '../../Components/FetchRetry'
+import Box from '@material-ui/core/Box';
+import Copyleft from '../../Components/Copyleft'
 
 
 var pjson = require('../../../package.json');
@@ -61,7 +63,10 @@ export default function About() {
                   </Async.Fulfilled>                  
                 </Typography>
               </Async>     
-            </Grid>   
+            </Grid>  
+            <Box mt={8}>
+              <Copyleft />
+            </Box>             
             </Grid>           
         </Flags>
       </div>
