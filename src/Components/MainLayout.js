@@ -1,25 +1,20 @@
 import React from 'react';
+import {BrowserRouter} from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import MenuCloseIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { Link, BrowserRouter, Switch, Route } from "react-router-dom";
-import { Flags } from 'react-feature-flags';
-import SideMenuItem from './SideMenuItem';
-import MenuIcon from './SideMenuIcon';
-import Home from '../Views/Home';
-import About from '../Views/About';
-import NotFound from '../Views/NotFound';
+import Routing from './Routing';
+import AccountMenu from './AccountMenu';
+import SideMenu from './SideMenu';
+
 import { AppInsightsContextProvider } from '../AppInsights/AppInsightsContext'
 
 const drawerWidth = 240;
@@ -108,6 +103,7 @@ export default function PrimarySearchAppBar() {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
  
+  const menuId = 'primary-account-menu';
   const isMenuOpen = Boolean(anchorEl);
  
   const handleProfileMenuOpen = (event) => {
@@ -126,23 +122,6 @@ export default function PrimarySearchAppBar() {
     setOpen(false);
   };
 
-  const menuId = 'primary-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-        {['Profile', 'Account'].map((text, index) => (
-            <MenuItem key={index} onClick={handleMenuClose}>{text}</MenuItem>
-        ))}
-    </Menu>
-  );
-
   return (
     <div className={classes.grow}>
         <AppBar
@@ -153,7 +132,7 @@ export default function PrimarySearchAppBar() {
           })}
         >
         <Toolbar data-testid="menu-toolbar">
-        <IconButton
+          <IconButton
               data-testid="menu-iconclose"
               color="inherit"
               aria-label="open drawer"
@@ -183,9 +162,9 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMenu}
       <BrowserRouter>
-      <AppInsightsContextProvider>
+        <AppInsightsContextProvider>
+          <AccountMenu menuId={menuId} anchor={anchorEl} open={isMenuOpen} closeHandler={handleMenuClose}></AccountMenu>
           <Drawer
             data-testid="menu-drawer"      
             variant="permanent"
@@ -206,23 +185,12 @@ export default function PrimarySearchAppBar() {
               </IconButton>
             </div>
             <Divider data-testid="menu-divider"/>
-            <Flags authorizedFlags={["AdminOnly"]}>
-              <List data-testid="menu-options">
-                {['Home', 'About'].map((text, index) => (
-                  <SideMenuItem key={index} text={text} open={open} link={Link} icon={ <MenuIcon name={text}/> }/>
-                ))}
-              </List>
-            </Flags>
+            <SideMenu open={open}></SideMenu>
           </Drawer>
           <main className={clsx(classes.content, {
             [classes.contentShift]: open,
           })}>
-            <Switch>
-                <Route exact path="/" render={() => <Home/>}/>
-                <Route path="/Home" render={() => <Home/>} />
-                <Route path="/About" render={() => <About/>} />
-                <Route component={NotFound} />
-            </Switch>
+            <Routing/>
           </main>
           </AppInsightsContextProvider>
         </BrowserRouter>
