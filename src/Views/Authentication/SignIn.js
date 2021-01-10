@@ -12,7 +12,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyleft from '../../Components/Copyleft'
+import GoogleButton from 'react-google-button';
+import GithubButton from 'react-github-login-button';
+import Copyleft from '../../Components/Copyleft';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   form: {
+    paddingLeft:'25%',
+    paddingRight:'25%',
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
@@ -42,7 +47,7 @@ export default function SignIn() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -87,18 +92,26 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <Box mt={1} align='center'>
+            <GoogleButton onClick={() => { console.log('Google button clicked') }}/>  
+          </Box>
+          <Box mt={1} align='center'>
+            <GithubButton onClick={() => { console.log('Github button clicked') }}/>     
+          </Box>
+          <Box mt={1}>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item >
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>  
+          </Box>
         </form>
       </div>
       <Box mt={8}>

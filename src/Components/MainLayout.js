@@ -15,16 +15,19 @@ import Routing from './Routing';
 import AccountMenu from './AccountMenu';
 import SideMenu from './SideMenu';
 
+
 import { AppInsightsContextProvider } from '../AppInsights/AppInsightsContext'
 
 const drawerWidth = 240;
+const margin = 36;
+const barHeight = 64;
 
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
       },
       menuButton: {
-        marginRight: 36,
+        marginRight: margin,
       },
       title: {
         display: 'none',
@@ -49,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
       zIndex: theme.zIndex.drawer + 1,
-      marginLeft: theme.spacing(9) + 1,
+      marginLeft: barHeight + margin,
+      marginTop: barHeight + margin,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -79,11 +83,12 @@ const useStyles = makeStyles((theme) => ({
       }),
     },
     drawerClose: {
+      width: theme.spacing(7) + 1,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      overflowX: 'hidden',
+    overflowX: 'hidden',
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(7) + 1,
       },
@@ -98,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function PrimarySearchAppBar() {
+export default function MainLayout() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -124,15 +129,14 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-        <AppBar
+         <AppBar
           data-testid="menu-appbar"
           position="fixed"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
-          })}
-        >
-        <Toolbar data-testid="menu-toolbar">
-          <IconButton
+          })} >
+        <Toolbar data-testid="menu-toolbar"> 
+           <IconButton
               data-testid="menu-iconclose"
               color="inherit"
               aria-label="open drawer"
@@ -140,14 +144,13 @@ export default function PrimarySearchAppBar() {
               edge="start"
               className={clsx(classes.menuButton, {
                 [classes.hide]: open,
-              })}
-            >
+              })}>
               <MenuCloseIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap data-testid="menu-heading">
+            </IconButton> 
+             <Typography variant="h6" noWrap data-testid="menu-heading">
               Liminal
-            </Typography>
-          <div className={classes.grow} />
+            </Typography> 
+           <div className={classes.grow} /> 
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
@@ -155,13 +158,12 @@ export default function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
+              color="inherit">
               <AccountCircle />
             </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
+          </div> 
+       </Toolbar>
+      </AppBar> 
       <BrowserRouter>
         <AppInsightsContextProvider>
           <AccountMenu menuId={menuId} anchor={anchorEl} open={isMenuOpen} closeHandler={handleMenuClose}></AccountMenu>
@@ -177,13 +179,12 @@ export default function PrimarySearchAppBar() {
                 [classes.drawerOpen]: open,
                 [classes.drawerClose]: !open,
               }),
-            }}
-          >
+            }}>
             <div className={classes.toolbar}>
               <IconButton onClick={handleDrawerClose} data-testid="menu-iconopen">
                 <MenuOpenIcon />
               </IconButton>
-            </div>
+            </div> 
             <Divider data-testid="menu-divider"/>
             <SideMenu open={open}></SideMenu>
           </Drawer>
