@@ -14,7 +14,7 @@ export default function Copyleft() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyleft '}
-        <span class={classes.copyleft}>&copy;</span>
+        <span className={classes.copyleft}>&copy;</span>
         {' '}
         liminal
         {' '}

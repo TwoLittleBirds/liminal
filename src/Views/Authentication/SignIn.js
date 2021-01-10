@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import GoogleButton from 'react-google-button';
-import GithubButton from 'react-github-login-button';
+import GoogleButton from 'react-google-button/dist/react-google-button';
+import GithubButton from 'react-github-login-button/dist/react-github-button';
 import Copyleft from '../../Components/Copyleft';
 
 
