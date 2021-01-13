@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import MainLayout from '../../Components/MainLayout';
 import { FlagsProvider } from 'react-feature-flags';
+import { authenticationService } from '../../Components/AuthService';
 
 const flags = [{name: "AdminOnly", isActive: true}]
 
@@ -68,6 +69,10 @@ test('renders divider', () => {
 });
 
 test('renders options', () => {
+  act(() => {
+    authenticationService.login('','')
+  });
+
   render(<FlagsProvider value={flags}>
     <MainLayout/>
   </FlagsProvider>);
@@ -76,6 +81,15 @@ test('renders options', () => {
   expect(elem).toBeInTheDocument();
 });
 
+
+test('when no user does not render options', () => {
+  render(<FlagsProvider value={flags}>
+    <MainLayout/>
+  </FlagsProvider>);
+
+  const elem = screen.getByTestId("menu-options");
+  expect(elem).toBeInTheDocument();
+});
 test('when not active does not render options', () => {
   const flags = [{name: "AdminOnly", isActive: false}]
 

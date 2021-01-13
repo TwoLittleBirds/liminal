@@ -130,8 +130,17 @@ export default function MainLayout() {
   };
 
   useEffect(() => {
+    let mounted = true;
     document.title = "Liminal - About";
-    authenticationService.currentUser.subscribe(x => setCurrentUser(x));
+    authenticationService.currentUser.subscribe(x => {
+        if (mounted){
+          setCurrentUser(x)
+        }
+    });
+
+    return function cleanup() {
+      mounted = false;
+    }
   }, []);
 
   return (
