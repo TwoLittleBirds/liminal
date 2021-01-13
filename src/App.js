@@ -7,12 +7,16 @@ import ErrorBoundary from './Components/ErrorBoundary';
 import { trackException } from './AppInsights/AppInsights';
 
 
+
 const FEATURE_FLAG_ENDPOINT = 'Endpoint=https://reactfeatureflags.azconfig.io;Id=QRTD-lw-s0:utLC2mgsf/kfq/ndJdi3;Secret=tmRdRfNJwwE+l5Mm+sJCGL4WO8obu11RLLe2F3fzGpc='
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {flags: []};
+    this.state = {
+      flags: [],
+      currentUser: null
+    };
 
     this._isMounted = false;
   }
@@ -21,6 +25,10 @@ class App extends Component {
     this._isMounted = true;
     await this.getFeatureFlags();
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }  
 
   getFeatureFlags = async () => {
     try{
@@ -42,10 +50,6 @@ class App extends Component {
       trackException({ error: new Error(e), severityLevel: SeverityLevel.Error })
     }
   };
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
 
   render(){
     return(

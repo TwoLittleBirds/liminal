@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter} from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuCloseIcon from '@material-ui/icons/Menu';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { authenticationService } from './AuthService';
 import Routing from './Routing';
 import AccountMenu from './AccountMenu';
 import SideMenu from './SideMenu';
@@ -107,7 +108,8 @@ export default function MainLayout() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
- 
+  const [currentUser, setCurrentUser] = React.useState(null);
+
   const menuId = 'primary-account-menu';
   const isMenuOpen = Boolean(anchorEl);
  
@@ -126,6 +128,11 @@ export default function MainLayout() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    document.title = "Liminal - About";
+    authenticationService.currentUser.subscribe(x => setCurrentUser(x));
+  }, []);
 
   return (
     <div className={classes.grow}>
@@ -166,7 +173,7 @@ export default function MainLayout() {
       </AppBar> 
       <BrowserRouter>
         <AppInsightsContextProvider>
-          <AccountMenu menuId={menuId} anchor={anchorEl} open={isMenuOpen} closeHandler={handleMenuClose}></AccountMenu>
+            <AccountMenu user={currentUser} menuId={menuId} anchor={anchorEl} open={isMenuOpen} closeHandler={handleMenuClose}></AccountMenu>
           <Drawer
             data-testid="menu-drawer"      
             variant="permanent"
@@ -186,7 +193,9 @@ export default function MainLayout() {
               </IconButton>
             </div> 
             <Divider data-testid="menu-divider"/>
-            <SideMenu open={open}></SideMenu>
+            { currentUser &&
+              <SideMenu open={open}></SideMenu>
+            }
           </Drawer>
           <main className={clsx(classes.content, {
             [classes.contentShift]: open,

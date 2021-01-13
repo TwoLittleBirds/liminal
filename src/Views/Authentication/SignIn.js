@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import GoogleButton from 'react-google-button/dist/react-google-button';
 import GithubButton from 'react-github-login-button/dist/react-github-button';
 import Copyleft from '../../Components/Copyleft';
+import { authenticationService } from '../../Components/AuthService';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +46,10 @@ export default function SignIn() {
   }, []); 
 
   const classes = useStyles();
+
+  const submit = () => {
+    authenticationService.login('','')
+  }
 
   return (
     <Container component="main">
@@ -93,7 +98,7 @@ export default function SignIn() {
             Sign In
           </Button>
           <Box mt={1} align='center'>
-            <GoogleButton onClick={() => { console.log('Google button clicked') }}/>  
+            <GoogleButton onClick={() => { submit();console.log('Google button clicked') }}/>  
           </Box>
           <Box mt={1} align='center'>
             <GithubButton onClick={() => { console.log('Github button clicked') }}/>     
